@@ -1,10 +1,10 @@
-const js = require('@eslint/js');
-const typescript = require('@typescript-eslint/eslint-plugin');
-const typescriptParser = require('@typescript-eslint/parser');
-const react = require('eslint-plugin-react');
-const reactHooks = require('eslint-plugin-react-hooks');
+import js from '@eslint/js';
+import typescript from '@typescript-eslint/eslint-plugin';
+import typescriptParser from '@typescript-eslint/parser';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
 
-module.exports = [
+export default [
   js.configs.recommended,
   {
     files: ['**/*.{ts,tsx}'],
@@ -22,6 +22,17 @@ module.exports = [
         es2021: true,
         node: true,
         jest: true,
+        describe: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        it: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+        document: 'readonly',
+        window: 'readonly',
+        KeyboardEvent: 'readonly',
       },
     },
     plugins: {
@@ -35,6 +46,7 @@ module.exports = [
       ...reactHooks.configs.recommended.rules,
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
+      'react/no-children-prop': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',

@@ -13,6 +13,12 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: 'tag'
+  },
+  viteFinal: async (config) => {
+    if (config.base) {
+      config.base = '/MaxJS/';
+    }
+    return config;
   }
 };
 

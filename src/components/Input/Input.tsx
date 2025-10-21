@@ -40,7 +40,7 @@ const Input: React.FC<InputProps> = ({
   iconPosition = 'left',
   className = ''
 }) => {
-  const [isFocused, setIsFocused] = useState(false);
+  const [, setIsFocused] = useState(false);
 
   const getVariantClasses = () => {
     if (useCss) return 'input';
