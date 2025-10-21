@@ -10,7 +10,9 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/
       }
-    }
+    },
+    // Ensure proper base path for GitHub Pages
+    base: '/MaxJS/',
   }
 };
 
