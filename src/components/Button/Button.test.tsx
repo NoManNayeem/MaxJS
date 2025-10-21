@@ -19,19 +19,19 @@ describe('Button Component', () => {
 
   test('is disabled when disabled prop is true', () => {
     render(<Button label="Click Me" disabled={true} />);
-    const button = screen.getByText('Click Me');
+    const button = screen.getByRole('button');
     expect(button).toBeDisabled();
   });
 
   test('uses CSS classes when useCss is true', () => {
     render(<Button label="Click Me" useCss={true} />);
-    const button = screen.getByText('Click Me');
+    const button = screen.getByRole('button');
     expect(button).toHaveClass('button');
   });
 
   test('uses Tailwind classes when useCss is false', () => {
     render(<Button label="Click Me" useCss={false} />);
-    const button = screen.getByText('Click Me');
-    expect(button).toHaveClass('bg-blue-500', 'text-white', 'px-4', 'py-2', 'rounded', 'cursor-pointer');
+    const button = screen.getByRole('button');
+    expect(button).toHaveClass('bg-blue-600', 'text-white', 'px-4', 'py-2', 'rounded-lg');
   });
 });

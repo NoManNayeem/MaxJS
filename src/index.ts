@@ -4,3 +4,6 @@ export * from './components/Hero';
 export * from './components/Footer';
 export * from './components/FadeIn';
 export * from './components/ParticleBackground';
+export * from './components/Card';
+export * from './components/Input';
+export * from './components/Modal';

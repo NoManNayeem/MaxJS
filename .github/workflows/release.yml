@@ -1,0 +1,103 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., v1.0.0)'
+        required: true
+        type: string
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run tests
+        run: npm test -- --watchAll=false
+      
+      - name: Build library
+        run: npm run build
+      
+      - name: Extract version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Update package.json version
+        run: |
+          npm version ${{ steps.version.outputs.version }} --no-git-tag-version
+      
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          release_name: Release ${{ steps.version.outputs.version }}
+          body: |
+            ## What's Changed
+            
+            - Enhanced UI components with modern design
+            - Added new Card component with multiple variants
+            - Improved Button component with loading states and icons
+            - Enhanced animations and micro-interactions
+            - Better accessibility and responsive design
+            
+            ## Installation
+            
+            ```bash
+            npm install maxjs@${{ steps.version.outputs.version }}
+            ```
+            
+            ## Documentation
+            
+            📖 [View Live Documentation](https://NoManNayeem.github.io/MaxJS)
+            
+            ## Components
+            
+            - Button (with variants, sizes, loading states)
+            - Card (with images, hover effects, animations)
+            - Navbar (responsive navigation)
+            - Hero (gradient backgrounds)
+            - Footer (simple footer)
+            - FadeIn (smooth animations)
+            - ParticleBackground (animated backgrounds)
+            
+            ## Features
+            
+            - 🎯 TypeScript support
+            - 🎨 Tailwind CSS and plain CSS support
+            - ⚡ Framer Motion animations
+            - 📱 Responsive design
+            - ♿ Accessibility features
+            - 🧪 Comprehensive testing
+          draft: false
+          prerelease: false
