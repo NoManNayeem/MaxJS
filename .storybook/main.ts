@@ -32,14 +32,6 @@ const config: StorybookConfig = {
       };
     }
     
-    // Ensure proper module resolution
-    config.resolve = {
-      ...config.resolve,
-      alias: {
-        ...config.resolve?.alias,
-      }
-    };
-    
     return config;
   }
 };

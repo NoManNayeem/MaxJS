@@ -1,0 +1,160 @@
+/* Tabs Component Styles */
+.tabs-container {
+  width: 100%;
+}
+
+.tab-list {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-item:hover {
+  color: #374151;
+}
+
+.tab-item.active {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+}
+
+.tab-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tab-icon {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.tab-content {
+  padding: 16px 0;
+}
+
+.tabs-horizontal {
+  display: flex;
+}
+
+/* Tab Types */
+.tab-list.card {
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 4px;
+  border-bottom: none;
+}
+
+.tab-list.card .tab-item {
+  border-radius: 6px;
+  border-bottom: none;
+}
+
+.tab-list.card .tab-item.active {
+  background: white;
+  color: #2563eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tab-list.button {
+  gap: 4px;
+  border-bottom: none;
+}
+
+.tab-list.button .tab-item {
+  border-radius: 6px;
+  border-bottom: none;
+}
+
+.tab-list.button .tab-item.active {
+  background: #2563eb;
+  color: white;
+}
+
+.tab-list.button .tab-item:not(.active) {
+  background: #e5e7eb;
+  color: #6b7280;
+}
+
+.tab-list.button .tab-item:not(.active):hover {
+  background: #d1d5db;
+  color: #374151;
+}
+
+/* Size variants */
+.tab-list.sm .tab-item {
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.tab-list.md .tab-item {
+  padding: 12px 16px;
+  font-size: 16px;
+}
+
+.tab-list.lg .tab-item {
+  padding: 16px 20px;
+  font-size: 18px;
+}
+
+/* Position variants */
+.tabs-horizontal {
+  display: flex;
+}
+
+.tabs-horizontal .tab-list {
+  flex-direction: column;
+  border-bottom: none;
+  border-right: 1px solid #e5e7eb;
+  min-width: 200px;
+}
+
+.tabs-horizontal .tab-list .tab-item {
+  border-bottom: none;
+  border-right: 2px solid transparent;
+}
+
+.tabs-horizontal .tab-list .tab-item.active {
+  border-right-color: #2563eb;
+  border-bottom-color: transparent;
+}
+
+.tabs-horizontal .tab-content {
+  flex: 1;
+  margin-left: 16px;
+  margin-top: 0;
+}
+
+/* Centered tabs */
+.tab-list.centered {
+  justify-content: center;
+}
+
+/* Animations */
+.tab-item {
+  position: relative;
+}
+
+.tab-item::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #2563eb;
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+
+.tab-item.active::after {
+  transform: scaleX(1);
+}
